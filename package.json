@@ -11,7 +11,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "predeploy": "yarn run build",
-    "deploy": "./node_modules/gh-pages/bin/gh-pages.js -d build",
+    "deploy": "node ./node_modules/gh-pages/bin/gh-pages.js -d build",
     "---additional": "---------------------------------------------------------------",
     "format": "./node_modules/prettier/bin-prettier.js -w --config ./.prettierrc .",
     "lint": "./node_modules/.bin/eslint --ext .ts,.tsx,.js,.jsx .",
