@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/auto-leasing-calc/static/css/main.d4fac892.css",
+    "main.js": "/auto-leasing-calc/static/js/main.254e9288.js",
+    "static/media/Nekst-Black.woff2": "/auto-leasing-calc/static/media/Nekst-Black.44814bfd3ba4a266cf1d.woff2",
+    "static/media/Gilroy-Regular.woff2": "/auto-leasing-calc/static/media/Gilroy-Regular.f6c9931fabe5a6eb3307.woff2",
+    "index.html": "/auto-leasing-calc/index.html",
+    "main.d4fac892.css.map": "/auto-leasing-calc/static/css/main.d4fac892.css.map",
+    "main.254e9288.js.map": "/auto-leasing-calc/static/js/main.254e9288.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d4fac892.css",
+    "static/js/main.254e9288.js"
+  ]
+}
