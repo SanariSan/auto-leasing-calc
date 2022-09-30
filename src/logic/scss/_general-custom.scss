@@ -1,0 +1,24 @@
+// for debug
+* {
+  // box-sizing: border-box;
+  // outline: 1px solid lightseagreen !important;
+  // background: rgba(141, 234, 255, 0.1);
+}
+
+body {
+  font-family: $font-default;
+  font-size: $font-size-medium;
+  color: $text-color-default;
+  background-color: $bg-color !important;
+}
+
+h1 {
+  font-size: $font-size-huge;
+  color: $text-color-accent;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
