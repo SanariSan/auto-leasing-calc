@@ -6,7 +6,7 @@ import { MainContainer } from './containers/main';
 const App: FC = () => (
   <>
     <Switch>
-      <Route exact path="/">
+      <Route exact path={`/${String(process.env.REACT_APP_URL_PATH)}`}>
         <MainContainer />
       </Route>
     </Switch>
