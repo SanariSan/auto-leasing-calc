@@ -3,18 +3,21 @@ $font-default: 'Gilroy-Regular', sans-serif;
 
 $font-size-huge: 54px;
 $font-size-big: 30px;
-$font-size-medium: 16px;
+$font-size-medium: 20px;
+$font-size-small: 16px;
 
 $white-color: #ffffff;
-$white-color-2: #e5e5e5;
+$white-color-2: #fdfcf7;
 $black-color: #111111;
 $gray-color: #333333;
 $gray-color-2: #575757;
+$gray-color-3: #e1e1e1;
+$gray-color-4: #f3f3f4;
 // $gray-color-2: rgba(87, 87, 87, 0.4);
 $orange-color: #ff9514;
 $orange-color-2: rgba(255, 149, 20, 0.4);
 
-$bg-color: $white-color-2;
+$bg-color: $white-color;
 $text-color-accent: $black-color;
 $text-color-default: $gray-color;
 // $text-color-inactive: $gray-color-2;
