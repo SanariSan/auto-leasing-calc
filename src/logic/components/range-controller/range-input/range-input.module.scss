@@ -1,0 +1,28 @@
+@import '../../../scss/index.custom';
+
+.inputWrapper {
+  textarea {
+    width: 100%;
+    height: 100%;
+    padding: 12px 20px;
+
+    resize: none;
+    font-size: $font-size-big;
+    font-family: $font-accent;
+    color: $gray-color-2;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border-color: $gray-color-4;
+    border-style: solid;
+
+    transition: background-color 0.2s;
+    background-color: $gray-color-4;
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+}
