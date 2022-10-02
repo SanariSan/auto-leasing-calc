@@ -16,7 +16,10 @@ const App: FC = () => {
     <>
       <Switch>
         <Route exact path={`/${process.env.REACT_APP_URL_PATH}`}>
-          <pre style={{ fontSize: '15px' }}>Current page size - {`${w} x ${h}`}</pre>
+          <pre style={{ fontSize: '15px' }}>
+            Current page size - {`${w} x ${h}`} | $screen-xs-min: 0px; | $screen-sm-min: 320px; |
+            $screen-md-min: 768px; | $screen-lg-min: 1024px; | $screen-xl-min: 1440px;
+          </pre>
           <Container className={s.appWrap}>
             <Container as={'form'} fluid className={s.app}>
               <MainContainer />

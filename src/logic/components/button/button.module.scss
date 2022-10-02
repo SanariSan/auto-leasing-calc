@@ -1,0 +1,15 @@
+@import '../../scss/index.custom';
+
+.btn {
+  padding: 18px 10px;
+  border-radius: 50px;
+  background-color: $orange-color;
+  color: $white-color;
+  font-family: $font-accent;
+  font-size: $font-size-big;
+  font-weight: normal;
+
+  @include md {
+    font-size: $font-size-medium;
+  }
+}
