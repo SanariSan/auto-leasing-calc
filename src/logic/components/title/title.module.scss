@@ -1,0 +1,11 @@
+@import '../../scss/index.custom';
+
+.title {
+  font-family: $font-accent;
+  color: $text-color-accent;
+  font-size: $font-size-huge;
+
+  @include md {
+    font-size: $font-size-bigger;
+  }
+}

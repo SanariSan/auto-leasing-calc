@@ -1,6 +1,10 @@
 import React from 'react';
+import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { TitleComponent } from '../../components/title';
+import { ButtonContainer } from '../button';
 import { RangeControllersContainer } from '../range-controllers';
+import { SummContainers } from '../summ-containers';
 
 const MainContainer: React.FC = () => {
   const a = 1;
@@ -8,18 +12,16 @@ const MainContainer: React.FC = () => {
   return (
     <>
       <Row>
-        {/* Title container */}
-        <h1>Here will be title</h1>
+        <TitleComponent />
       </Row>
-      <Row xs={1} xl={3}>
+      <Row sm={1} xl={3}>
         <RangeControllersContainer />
       </Row>
-      <Row xs={1} sm={2} xl={3}>
-        {/* Calc Summary container */}
-        {/* Button container */}
-        <h3>Here will be summ</h3>
-        <h3>Here will be summ2</h3>
-        <button>Here will be button</button>
+      <Row sm={1} md={2} xl={3}>
+        <SummContainers />
+        <Col md={6} lg={4} xl={4}>
+          <ButtonContainer />
+        </Col>
       </Row>
     </>
   );

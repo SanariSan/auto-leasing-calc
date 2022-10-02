@@ -1,0 +1,18 @@
+@import '../../scss/index.custom';
+
+.amount {
+  font-family: $font-accent;
+  font-size: $font-size-huge;
+  color: $gray-color;
+  vertical-align: middle;
+
+  @include md {
+    font-size: $font-size-medium;
+  }
+}
+
+// TODO: align???
+.symbol {
+  // font-size: 48px;
+  // vertical-align: top;
+}

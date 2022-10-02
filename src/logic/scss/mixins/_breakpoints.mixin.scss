@@ -1,3 +1,6 @@
+// VALUE AND LOWER
+// PLACE IN DESCENDING ORDER (xl, lg, md...)
+
 // default, 0 and more
 @mixin xs {
   @media (max-width: $screen-xs-min) {
@@ -29,6 +32,13 @@
 // Extra large devices
 @mixin xl {
   @media (max-width: $screen-xl-min) {
+    @content;
+  }
+}
+
+// Omega large devices
+@mixin xxl {
+  @media (max-width: $screen-xxl-min) {
     @content;
   }
 }
