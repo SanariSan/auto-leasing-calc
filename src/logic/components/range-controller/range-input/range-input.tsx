@@ -1,10 +1,6 @@
 import type { FC } from 'react';
 import s from './range-input.module.scss';
-
-type TRangeInput = {
-  textareaValue: string;
-  onTextareaInput: (evt: React.FormEvent<HTMLTextAreaElement>) => void;
-};
+import type { TRangeInput } from './range-input.type';
 
 const RangeInputComponent: FC<TRangeInput> = ({ textareaValue, onTextareaInput }) => (
   <textarea

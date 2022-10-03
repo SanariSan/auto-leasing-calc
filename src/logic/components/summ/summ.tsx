@@ -1,13 +1,10 @@
 import type { FC } from 'react';
 import s from './summ.module.scss';
+import type { TSumm } from './summ.type';
 
-type TSumm = {
-  amount: number | string;
-};
-
-const SummComponent: FC<TSumm> = ({ amount }) => (
+const SummComponent: FC<TSumm> = ({ amount, symbol }) => (
   <div className={s.amount}>
-    {amount} <span className={s.symbol}>₽</span>
+    {amount} <span className={s.symbol}>{symbol}</span>
   </div>
 );
 export { SummComponent };
