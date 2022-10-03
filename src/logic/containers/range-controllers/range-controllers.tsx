@@ -1,4 +1,7 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { RangeControllerContainer } from '../range-controller';
 
 const priceHint = <pre style={{ position: 'absolute', right: '8%', top: '50%' }}>₽</pre>;
@@ -24,29 +27,37 @@ const RangeControllersContainer: React.FC = () => {
   const repaymentLengthCurrent = 60;
 
   return (
-    <>
-      <RangeControllerContainer
-        min={priceMin}
-        max={priceMax}
-        current={priceCurrent}
-        hintTitle={'Стоимость автомобиля'}
-        hintRight={priceHint}
-      />
-      <RangeControllerContainer
-        min={priceMin}
-        max={priceMax}
-        current={priceCurrent}
-        hintTitle={'Первоначальный взнос'}
-        hintRight={percHint}
-      />
-      <RangeControllerContainer
-        min={repaymentLengthMin}
-        max={repaymentLengthMax}
-        current={repaymentLengthCurrent}
-        hintTitle={'Срок лизинга'}
-        hintRight={repaymentLengthHint}
-      />
-    </>
+    <Container fluid className="px-0">
+      <Row>
+        <Col xs={12} xl={4}>
+          <RangeControllerContainer
+            min={priceMin}
+            max={priceMax}
+            current={priceCurrent}
+            hintTitle={'Стоимость автомобиля'}
+            hintRight={priceHint}
+          />
+        </Col>
+        <Col xs={12} xl={4}>
+          <RangeControllerContainer
+            min={priceMin}
+            max={priceMax}
+            current={priceCurrent}
+            hintTitle={'Первоначальный взнос'}
+            hintRight={percHint}
+          />
+        </Col>
+        <Col xs={12} xl={4}>
+          <RangeControllerContainer
+            min={repaymentLengthMin}
+            max={repaymentLengthMax}
+            current={repaymentLengthCurrent}
+            hintTitle={'Срок лизинга'}
+            hintRight={repaymentLengthHint}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

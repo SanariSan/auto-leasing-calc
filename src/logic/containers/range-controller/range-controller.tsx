@@ -1,15 +1,8 @@
-import type { FC, ReactElement } from 'react';
-import { useMemo, useEffect, useCallback, useState } from 'react';
+import type { FC } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounceWrap } from '../../../helpers/util';
 import { RangeControllerComponent } from '../../components/range-controller';
-
-type TRangeController = {
-  min: number;
-  max: number;
-  current: number;
-  hintTitle: string;
-  hintRight?: ReactElement;
-};
+import type { TRangeController } from './range-controller.type';
 
 const RangeControllerContainer: FC<TRangeController> = ({
   min,
@@ -69,18 +62,16 @@ const RangeControllerContainer: FC<TRangeController> = ({
   }, []);
 
   return (
-    <>
-      <RangeControllerComponent
-        min={min}
-        max={max}
-        textareaValue={textareaValue}
-        sliderValue={sliderValue}
-        onTextareaInput={onTextareaInput}
-        onSliderInput={onSliderInput}
-        hintTitle={hintTitle}
-        hintRight={hintRight}
-      />
-    </>
+    <RangeControllerComponent
+      min={min}
+      max={max}
+      textareaValue={textareaValue}
+      sliderValue={sliderValue}
+      onTextareaInput={onTextareaInput}
+      onSliderInput={onSliderInput}
+      hintTitle={hintTitle}
+      hintRight={hintRight}
+    />
   );
 };
 
