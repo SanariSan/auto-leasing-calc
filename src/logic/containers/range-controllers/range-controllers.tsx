@@ -1,17 +1,19 @@
-import type { FC, FormEvent } from 'react';
-import React, { useEffect, useState } from 'react';
+import type { FC } from 'react';
+import { useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { debounceWrap } from '../../../helpers/util';
+import { deTemplate, template } from '../../../helpers/util';
 import { DimmerComponent } from '../../components/dimmer';
-import { RangeInputComponent } from '../../components/range-controller/range-input';
+import { HintRightComponent } from '../../components/range-controller';
+import { TitleSubComponent } from '../../components/title';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   carPriceSelector,
   firstPaymentSelector,
   repaymentLengthSelector,
   setCarPrice,
+  setFirstPayment,
   setFirstPaymentPerc,
   setRepaymentLength,
   submitParamsSelector,
@@ -19,41 +21,8 @@ import {
   updateMonthlyRepayment,
   updateTotalPayment,
 } from '../../store';
-import { RangeControllerContainer } from '../range-controller';
-
-const priceHint = <pre style={{ position: 'absolute', right: '8%', top: '50%' }}>₽</pre>;
-const PercHintComponent: FC<any> = ({ val }: { val: number }) => {
-  const { firstPaymentPercMin, firstPaymentPercMax, firstPaymentPercCurrent, firstPaymentCurrent } =
-    useAppSelector(firstPaymentSelector);
-
-  return (
-    <RangeInputComponent
-      textareaValue={`${firstPaymentPercCurrent}`}
-      hint={''}
-      onTextareaInput={(evt) => {
-        evt.preventDefault();
-        if (evt.currentTarget.value.length >= 2) return;
-        if (!/^\d+$/gi.test(evt.currentTarget.value) && evt.currentTarget.value !== '') return;
-
-        // setTextareaValue(evt.currentTarget.value);
-        // applyTextareaValueToStoreDebounced(evt.currentTarget.value);
-      }}
-      styleInject={{
-        position: 'absolute',
-        right: '3%',
-        top: '25%',
-        width: '100px',
-        height: '70px',
-        padding: '15px 5px 0px 25px',
-        fontSize: '30px',
-        backgroundColor: '#ebebec',
-      }}
-    />
-  );
-};
-const repaymentLengthHint = (
-  <pre style={{ position: 'absolute', right: '8%', top: '50%' }}>МЕС.</pre>
-);
+import { RangeInputContainer } from '../range-input';
+import { RangeSliderContainer } from '../range-slider';
 
 const RangeControllersContainer: FC = () => {
   const { carPriceMin, carPriceMax, carPriceCurrent } = useAppSelector(carPriceSelector);
@@ -64,8 +33,6 @@ const RangeControllersContainer: FC = () => {
   const { monthlyRepayment } = useAppSelector(summSelector);
   const { status } = useAppSelector(submitParamsSelector);
   const dispatch = useAppDispatch();
-
-  // ---
 
   useEffect(() => {
     dispatch(updateMonthlyRepayment());
@@ -80,40 +47,98 @@ const RangeControllersContainer: FC = () => {
     dispatch(updateMonthlyRepayment());
   }, [dispatch, firstPaymentCurrent, repaymentLengthCurrent]);
 
-  // ---
-
   return (
-    <Container fluid className="px-0" style={{ position: 'relative' }}>
+    <Container className="px-0 position-relative">
       <Row>
         <Col xs={12} xl={4}>
-          <RangeControllerContainer
-            min={carPriceMin}
-            max={carPriceMax}
-            current={carPriceCurrent}
-            actionCreator={setCarPrice}
-            hintTitle={'Стоимость автомобиля'}
-            hintRight={priceHint}
-          />
+          <Container className="gy-3 px-2">
+            <Row className="py-3">
+              <Col className="px-0">
+                <TitleSubComponent text={'Стоимость автомобиля'} />
+              </Col>
+            </Row>
+            <Row>
+              <Col className="px-0 position-relative">
+                <RangeInputContainer
+                  current={carPriceCurrent}
+                  template={template}
+                  deTemplate={deTemplate}
+                  maxInputLength={10}
+                  actionCreator={setCarPrice}
+                />
+                <HintRightComponent text={'₽'} />
+                <RangeSliderContainer
+                  min={carPriceMin}
+                  max={carPriceMax}
+                  current={carPriceCurrent}
+                  actionCreator={setCarPrice}
+                />
+              </Col>
+            </Row>
+          </Container>
         </Col>
         <Col xs={12} xl={4}>
-          <RangeControllerContainer
-            min={firstPaymentPercMin}
-            max={firstPaymentPercMax}
-            current={firstPaymentPercCurrent}
-            actionCreator={setFirstPaymentPerc}
-            hintTitle={'Первоначальный взнос'}
-            hintRight={<PercHintComponent val={firstPaymentPercCurrent} />}
-          />
+          <Container className="gy-3 px-2">
+            <Row className="py-3">
+              <Col className="px-0">
+                <TitleSubComponent text={'Первоначальный взнос'} />
+              </Col>
+            </Row>
+            <Row className="py-0">
+              <Col className="px-0 position-relative">
+                <RangeInputContainer
+                  current={firstPaymentCurrent}
+                  postpend={' ₽'}
+                  template={template}
+                  deTemplate={deTemplate}
+                  maxInputLength={10}
+                  actionCreator={setFirstPayment}
+                />
+                <HintRightComponent>
+                  <RangeInputContainer
+                    current={firstPaymentPercCurrent}
+                    postpend={' %'}
+                    template={template}
+                    deTemplate={deTemplate}
+                    maxInputLength={2}
+                    actionCreator={setFirstPaymentPerc}
+                    type={'overlay'}
+                  />
+                </HintRightComponent>
+                <RangeSliderContainer
+                  min={firstPaymentPercMin}
+                  max={firstPaymentPercMax}
+                  current={firstPaymentPercCurrent}
+                  actionCreator={setFirstPaymentPerc}
+                />
+              </Col>
+            </Row>
+          </Container>
         </Col>
         <Col xs={12} xl={4}>
-          <RangeControllerContainer
-            min={repaymentLengthMin}
-            max={repaymentLengthMax}
-            current={repaymentLengthCurrent}
-            actionCreator={setRepaymentLength}
-            hintTitle={'Срок лизинга'}
-            hintRight={repaymentLengthHint}
-          />
+          <Container className="gy-3 px-2">
+            <Row className="py-3">
+              <Col className="px-0">
+                <TitleSubComponent text={'Срок лизинга'} />
+              </Col>
+            </Row>
+            <Row className="py-0">
+              <Col className="px-0 position-relative">
+                <RangeInputContainer
+                  current={repaymentLengthCurrent}
+                  maxInputLength={3}
+                  actionCreator={setRepaymentLength}
+                />
+                <HintRightComponent text={'мес.'} />
+                <RangeSliderContainer
+                  min={repaymentLengthMin}
+                  max={repaymentLengthMax}
+                  current={repaymentLengthCurrent}
+                  actionCreator={setRepaymentLength}
+                />
+              </Col>
+            </Row>
+          </Container>
         </Col>
         <DimmerComponent dimmed={status === 'loading'} />
       </Row>

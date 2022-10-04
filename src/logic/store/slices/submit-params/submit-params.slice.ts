@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Request } from '../../../../access-layer/services';
 import type { TStore } from '../../store.type';
-import type { TInitialState, TInitialStateThunk } from './submit-params.slice.type';
+import { ThunkError } from './submit-params.error';
+import type { TInitialState } from './submit-params.slice.type';
 
 /* eslint-disable no-param-reassign */
 
@@ -16,16 +17,21 @@ const submitAllParams = createAsyncThunk(
   async (_: undefined, { getState, signal }) => {
     try {
       const state = getState() as ReturnType<TStore['getState']>;
+
       const body = JSON.stringify({
         carPriceCurrent: state.calcParams.carPrice.carPriceCurrent,
         firstPaymentCurrent: state.calcParams.firstPayment.firstPaymentCurrent,
         firstPaymentPercCurrent: state.calcParams.firstPayment.firstPaymentPercCurrent,
         repaymentLengthCurrent: state.calcParams.repaymentLength.repaymentLengthCurrent,
+        totalPayment: state.calcParams.summ.totalPayment,
+        monthlyRepayment: state.calcParams.summ.monthlyRepayment,
       });
 
       const response = await Request.post({
-        // url: `https://eoj3r7f3r4ef6v4.m.pipedream.net`,
-        url: `https://webhook.site/521a2a69-d51e-495c-bd73-8aa78dfebf46`,
+        url:
+          process.env.NODE_ENV === 'production'
+            ? `https://hookb.in/eK160jgYJ6UlaRPldJ1P`
+            : `https://webshook.site/521a2a69-d51e-495c-bd73-8aa78dfebf46`,
         headers: { 'Content-Type': 'application/json' },
         body,
         abortSignal: signal,
@@ -37,14 +43,18 @@ const submitAllParams = createAsyncThunk(
         return await response.text();
       }
     } catch (error: unknown) {
-      console.log(`Req error in thunk _ ${String(error)}`);
-      // console.log(error);
-      throw error;
+      const thunkError = new ThunkError((error as Error).message, {
+        which: 'Send summ data request',
+      });
+
+      console.log(JSON.stringify(thunkError));
+
+      throw thunkError;
     }
   },
   {
     condition: (_: undefined, { getState }) => {
-      const state = getState() as TInitialStateThunk;
+      const state = getState() as ReturnType<TStore['getState']>;
       const { status } = state.submitParams;
 
       if (['loading', 'succeeded', 'failed'].includes(status)) {
@@ -76,6 +86,7 @@ const submitParamsSlice = createSlice({
       })
       .addCase(submitAllParams.rejected, (state, action) => {
         state.status = 'failed';
+
         state.error = action.error.message;
       });
   },

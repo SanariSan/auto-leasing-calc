@@ -7,27 +7,27 @@
   z-index: 1;
   border-radius: 15px 15px 0px 0px;
 
-  width: 85%;
-  transform: translateX(8%) translateY(-2px);
+  width: 89%;
+  transform: translateX(7%) translateY(-2px);
 
   @include xl {
-    width: 90%;
-    transform: translateX(5%) translateY(-2px);
+    width: 95%;
+    transform: translateX(3%) translateY(-2px);
   }
 
   @include lg {
-    width: 87%;
-    transform: translateX(7%) translateY(-2px);
+    width: 93%;
+    transform: translateX(4%) translateY(-2px);
   }
 
   @include md {
-    width: 75%;
-    transform: translateX(15%) translateY(-2px);
+    width: 82%;
+    transform: translateX(13%) translateY(-2px);
   }
 
   @include sm {
-    width: 70%;
-    transform: translateX(20%) translateY(-2px);
+    width: 78%;
+    transform: translateX(15%) translateY(-2px);
   }
 
   -webkit-transition: 0.2s;
@@ -96,6 +96,16 @@
       background: $orange-color;
       border: none;
       cursor: pointer;
+
+      @include md {
+        width: 16px;
+        height: 16px;
+      }
+
+      @include sm {
+        width: 8px;
+        height: 8px;
+      }
     }
   }
 }

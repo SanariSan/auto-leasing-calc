@@ -1,1 +1,2 @@
-export * from './title';
+export * from './title-main';
+export * from './title-sub';

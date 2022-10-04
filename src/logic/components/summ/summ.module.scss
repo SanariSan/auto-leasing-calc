@@ -9,10 +9,13 @@
   @include md {
     font-size: $font-size-medium;
   }
+
+  @include sm {
+    font-size: $font-size-small;
+  }
 }
 
-// TODO: align???
 .symbol {
-  // font-size: 48px;
-  // vertical-align: top;
+  display: inline-block;
+  transform: translateY(-5px);
 }

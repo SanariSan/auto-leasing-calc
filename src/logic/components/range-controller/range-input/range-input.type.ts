@@ -1,8 +1,7 @@
 type TRangeInput = {
   textareaValue: string;
-  hint?: string;
   onTextareaInput: (evt: React.FormEvent<HTMLTextAreaElement>) => void;
-  styleInject?: Record<string, unknown>;
+  type?: 'default' | 'overlay';
 };
 
 export type { TRangeInput };

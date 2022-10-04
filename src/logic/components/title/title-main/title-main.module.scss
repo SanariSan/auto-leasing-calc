@@ -1,0 +1,15 @@
+@import '../../../scss/index.custom';
+
+.text {
+  font-family: $font-accent;
+  color: $text-color-accent;
+  font-size: $font-size-huge;
+
+  @include md {
+    font-size: $font-size-bigger;
+  }
+
+  @include sm {
+    font-size: $font-size-medium;
+  }
+}

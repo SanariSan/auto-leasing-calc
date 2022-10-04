@@ -1,0 +1,13 @@
+@import '../../scss/index.custom';
+
+.res {
+  position: absolute;
+  width: max-content;
+  font-size: $font-size-smaller;
+  background-color: $purple-color-1;
+  opacity: 0.6;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}

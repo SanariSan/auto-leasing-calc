@@ -3,25 +3,6 @@ import { INITIAL_STATE } from './calc-params.const';
 
 /* eslint-disable no-param-reassign */
 
-// TODO: recheck calculations just in case
-
-const calcTotalPayment = ({
-  firstPaymentCurrent,
-  repaymentLengthCurrent,
-  monthlyRepayment,
-}: Record<string, number>) =>
-  Math.floor(firstPaymentCurrent + repaymentLengthCurrent * monthlyRepayment);
-
-const calcMonthlyRepayment = ({
-  carPriceCurrent,
-  firstPaymentCurrent,
-  repaymentLengthCurrent,
-}: Record<string, number>) =>
-  Math.floor(
-    ((carPriceCurrent - firstPaymentCurrent) * (0.035 * (1 + 0.035) ** repaymentLengthCurrent)) /
-      ((1 + 0.035) ** repaymentLengthCurrent - 1),
-  );
-
 const calcParamsSlice = createSlice({
   name: 'calcParams',
   initialState: INITIAL_STATE,
@@ -30,7 +11,9 @@ const calcParamsSlice = createSlice({
       const { payload } = action;
       const {
         carPrice: { carPriceMin, carPriceMax },
+        firstPayment: { firstPaymentPercCurrent },
         carPrice,
+        firstPayment,
       } = state;
 
       if (!/^\d+$/gi.test(payload)) return;
@@ -41,22 +24,49 @@ const calcParamsSlice = createSlice({
       else if (payloadInt > carPriceMax) payloadInt = carPriceMax;
 
       carPrice.carPriceCurrent = payloadInt;
+      // when car price changed - recalculate firstPayment value
+      firstPayment.firstPaymentCurrent = Math.round((payloadInt / 100) * firstPaymentPercCurrent);
     },
-    // -------------------------------------------------------------------------------------------
-    setFirstPayment(state, action: { payload: number }) {
-      state.firstPayment.firstPaymentCurrent = action.payload;
-    },
-    setFirstPaymentPerc(state, action: { payload: number }) {
+    setFirstPayment(state, action: { payload: string }) {
+      const { payload } = action;
       const {
         carPrice: { carPriceCurrent },
+        firstPayment: { firstPaymentPercMin, firstPaymentPercMax },
         firstPayment,
       } = state;
 
-      // when percent changed - recalculate firstPayment value
-      firstPayment.firstPaymentPercCurrent = action.payload;
-      firstPayment.firstPaymentCurrent = (carPriceCurrent / 100) * action.payload;
+      if (!/^\d+$/gi.test(payload)) return;
+
+      const derivedFirstPaymentMin = (carPriceCurrent / 100) * firstPaymentPercMin;
+      const derivedFirstPaymentMax = (carPriceCurrent / 100) * firstPaymentPercMax;
+      let payloadInt = Number.parseInt(payload, 10);
+
+      if (payloadInt < derivedFirstPaymentMin) payloadInt = derivedFirstPaymentMin;
+      else if (payloadInt > derivedFirstPaymentMax) payloadInt = derivedFirstPaymentMax;
+
+      firstPayment.firstPaymentCurrent = payloadInt;
+      // when payment changed - recalculate firstPaymentPerc value
+      firstPayment.firstPaymentPercCurrent = Math.round((payloadInt / carPriceCurrent) * 100);
     },
-    // -------------------------------------------------------------------------------------------
+    setFirstPaymentPerc(state, action: { payload: string }) {
+      const { payload } = action;
+      const {
+        carPrice: { carPriceCurrent },
+        firstPayment: { firstPaymentPercMin, firstPaymentPercMax },
+        firstPayment,
+      } = state;
+
+      if (!/^\d+$/gi.test(payload)) return;
+
+      let payloadInt = Number.parseInt(payload, 10);
+
+      if (payloadInt < firstPaymentPercMin) payloadInt = firstPaymentPercMin;
+      else if (payloadInt > firstPaymentPercMax) payloadInt = firstPaymentPercMax;
+
+      firstPayment.firstPaymentPercCurrent = payloadInt;
+      // when percent changed - recalculate firstPayment value
+      firstPayment.firstPaymentCurrent = Math.round((carPriceCurrent / 100) * payloadInt);
+    },
     setRepaymentLength(state, action: { payload: string }) {
       const { payload } = action;
       const {
@@ -67,12 +77,9 @@ const calcParamsSlice = createSlice({
       if (!/^\d+$/gi.test(payload)) return;
 
       let payloadInt = Number.parseInt(payload, 10);
-      console.log(payloadInt);
 
       if (payloadInt < repaymentLengthMin) payloadInt = repaymentLengthMin;
       else if (payloadInt > repaymentLengthMax) payloadInt = repaymentLengthMax;
-
-      console.log(payloadInt);
 
       repaymentLength.repaymentLengthCurrent = payloadInt;
     },
@@ -86,11 +93,9 @@ const calcParamsSlice = createSlice({
         summ,
       } = state;
 
-      summ.totalPayment = calcTotalPayment({
-        firstPaymentCurrent,
-        repaymentLengthCurrent,
-        monthlyRepayment,
-      });
+      summ.totalPayment = Math.round(
+        firstPaymentCurrent + repaymentLengthCurrent * monthlyRepayment,
+      );
     },
     // DISPATCH FROM TARGET CONTAINER
     // WHEN VALUES(firstPaymentCurrent, repaymentLengthCurrent, carPriceCurrent) CHANGE
@@ -102,11 +107,12 @@ const calcParamsSlice = createSlice({
         summ,
       } = state;
 
-      summ.monthlyRepayment = calcMonthlyRepayment({
-        carPriceCurrent,
-        firstPaymentCurrent,
-        repaymentLengthCurrent,
-      });
+      const interestRate = 0.035;
+      summ.monthlyRepayment = Math.round(
+        ((carPriceCurrent - firstPaymentCurrent) *
+          (interestRate * (1 + interestRate) ** repaymentLengthCurrent)) /
+          ((1 + interestRate) ** repaymentLengthCurrent - 1),
+      );
     },
   },
 });
