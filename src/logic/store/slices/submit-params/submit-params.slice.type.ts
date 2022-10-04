@@ -1,12 +1,11 @@
 type TInitialState = {
-  todos: Array<Record<string, unknown>>;
-  lastFetchedId: number;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  response: Record<string, unknown> | string | undefined;
   error: string | undefined;
 };
 
 type TInitialStateThunk = {
-  fetchTodo: TInitialState;
+  submitParams: TInitialState;
 };
 
 export type { TInitialState, TInitialStateThunk };

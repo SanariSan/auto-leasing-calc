@@ -1,15 +1,68 @@
 @import '../../scss/index.custom';
 
 .btn {
+  position: relative;
   padding: 18px 10px;
+  min-height: 65px;
+  max-height: 65px;
   border-radius: 50px;
   background-color: $orange-color;
   color: $white-color;
   font-family: $font-accent;
   font-size: $font-size-big;
   font-weight: normal;
+  transition: background-color 0.2s;
+  align-items: center;
+  vertical-align: middle;
+
+  @include xl {
+    font-size: $font-size-medium;
+  }
 
   @include md {
     font-size: $font-size-medium;
+  }
+
+  @include sm {
+    font-size: $font-size-small;
+  }
+
+  &:hover {
+    background-color: $black-color;
+  }
+
+  &:active {
+    background-color: $gray-color-2;
+  }
+
+  &:disabled {
+    background-color: $orange-color-2;
+  }
+
+  .circle {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    margin-top: -7px;
+    color: $white-color;
+    border: 5px solid;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: rotate 1s linear infinite;
+
+    @include md {
+      height: 35px;
+      width: 35px;
+      margin-top: -5px;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

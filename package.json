@@ -1,7 +1,7 @@
 {
-  "name": "auto-leasing-calc",
+  "name": "car-leasing-calc",
   "version": "1.0.0",
-  "homepage": "https://sanarisan.github.io/auto-leasing-calc",
+  "homepage": "https://sanarisan.github.io/car-leasing-calc",
   "main": "./logic/index.js",
   "author": "SanariSan <SanariSan@users.noreply.github.com>",
   "license": "MIT",

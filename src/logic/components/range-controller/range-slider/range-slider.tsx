@@ -4,18 +4,9 @@ import s from './range-slider.module.scss';
 import type { TRangeSlider } from './range-slider.type';
 
 const RangeSliderComponent: FC<TRangeSlider> = ({ min, max, value, onSliderInput }) => {
-  const isActive = useRef(true);
   const filledRangeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    isActive.current = true;
-    return () => {
-      isActive.current = false;
-    };
-  });
-
-  useEffect(() => {
-    if (!isActive.current) return;
     if (filledRangeRef.current === null) return;
 
     const perc = ((Number(value) - Number(min)) / (Number(max) - Number(min))) * 100;

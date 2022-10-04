@@ -1,65 +1,64 @@
-import type { FC } from 'react';
+import type { FC, FormEvent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounceWrap } from '../../../helpers/util';
 import { RangeControllerComponent } from '../../components/range-controller';
+import { useAppDispatch } from '../../hooks/redux';
 import type { TRangeController } from './range-controller.type';
 
 const RangeControllerContainer: FC<TRangeController> = ({
   min,
   max,
   current,
+  actionCreator,
   hintTitle,
   hintRight,
 }) => {
+  const dispatch = useAppDispatch();
+
   const [sliderValue, setSliderValue] = useState(current);
   const [textareaValue, setTextareaValue] = useState(String(current));
 
-  // change input value when moving slider
   useEffect(() => {
-    setTextareaValue(String(sliderValue));
-  }, [sliderValue]);
+    // console.log('Current changed and =', current);
 
-  // check if value acceptable, correct if needed, update for both input/slider
-  const applyTextareaValueToSlider = useCallback(
-    (inputValue: string) => {
-      const localInputValue = inputValue;
-      if (!/^\d+$/gi.test(inputValue)) return;
+    setSliderValue(current);
+    setTextareaValue(String(current));
+  }, [current]);
 
-      let localInputValueInt = Number.parseInt(localInputValue, 10);
-
-      if (localInputValueInt < min) localInputValueInt = min;
-      else if (localInputValueInt > max) localInputValueInt = max;
-
-      setTextareaValue(String(localInputValueInt));
-      setSliderValue(localInputValueInt);
+  const applyTextareaValueToStore = useCallback(
+    (value: string) => {
+      dispatch(actionCreator(value));
+      setTextareaValue(String(current));
     },
-    [min, max],
+    [dispatch, actionCreator, current],
   );
 
-  const applyTextareaValueToSliderDebounced = useMemo(
-    () => debounceWrap(applyTextareaValueToSlider, 1000),
-    [applyTextareaValueToSlider],
+  const applyTextareaValueToStoreDebounced = useMemo(
+    () => debounceWrap(applyTextareaValueToStore, 1000),
+    [applyTextareaValueToStore],
   );
 
   const onTextareaInput = useCallback(
-    (evt: React.FormEvent<HTMLTextAreaElement>) => {
+    (evt: FormEvent<HTMLTextAreaElement>) => {
       evt.preventDefault();
       if (evt.currentTarget.value.length >= 12) return;
+      if (!/^\d+$/gi.test(evt.currentTarget.value) && evt.currentTarget.value !== '') return;
 
-      const inputValue = evt.currentTarget.value;
-
-      // set any typed value, just to show to the user
-      setTextareaValue(inputValue);
-      // plan applying this value to slider, with additional checks
-      applyTextareaValueToSliderDebounced(inputValue);
+      setTextareaValue(evt.currentTarget.value);
+      applyTextareaValueToStoreDebounced(evt.currentTarget.value);
     },
-    [applyTextareaValueToSliderDebounced],
+    [applyTextareaValueToStoreDebounced],
   );
 
-  const onSliderInput = useCallback((evt: React.FormEvent<HTMLInputElement>) => {
-    evt.preventDefault();
-    setSliderValue(Number.parseInt(evt.currentTarget.value, 10));
-  }, []);
+  const onSliderInput = useCallback(
+    (evt: React.FormEvent<HTMLInputElement>) => {
+      evt.preventDefault();
+
+      dispatch(actionCreator(evt.currentTarget.value));
+      applyTextareaValueToStoreDebounced.cancel();
+    },
+    [dispatch, actionCreator, applyTextareaValueToStoreDebounced],
+  );
 
   return (
     <RangeControllerComponent
