@@ -22,6 +22,7 @@ const RangeControllerComponent: FC<TRangeController> = ({
       <Col className="px-0" style={{ position: 'relative' }}>
         <TitleHintComponent hint={hintTitle} />
         <RangeInputComponent onTextareaInput={onTextareaInput} textareaValue={textareaValue} />
+        {/* maybe place hint component here */}
         {hintRight}
       </Col>
     </Row>

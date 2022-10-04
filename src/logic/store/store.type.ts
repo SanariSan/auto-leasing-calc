@@ -1,6 +1,9 @@
 import type { Store } from './store';
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type TRootState = ReturnType<typeof Store.getState>;
+type TRootState = ReturnType<typeof Store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type TAppDispatch = typeof Store.dispatch;
+type TAppDispatch = typeof Store.dispatch;
+type TStore = typeof Store;
+
+export type { TRootState, TAppDispatch, TStore };

@@ -1,11 +1,17 @@
 function debounceWrap<TArgs extends unknown[]>(func: (...args: TArgs) => void, timeout = 750) {
   let timer: NodeJS.Timeout;
-  return (...args: TArgs) => {
+  function fn(...args: TArgs) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       func(...args);
     }, timeout);
+  }
+
+  fn.cancel = () => {
+    clearTimeout(timer);
   };
+
+  return fn;
 }
 
 function debounceLeadingWrap<TArgs extends unknown[]>(
