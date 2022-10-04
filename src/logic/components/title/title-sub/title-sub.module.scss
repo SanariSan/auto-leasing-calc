@@ -1,0 +1,15 @@
+@import '../../../scss/index.custom';
+
+.text {
+  font-family: $font-default;
+  font-size: $font-size-small;
+  font-weight: normal;
+
+  @include md {
+    font-size: $font-size-smaller;
+  }
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}

@@ -1,39 +1,77 @@
 @import '../../../scss/index.custom';
 
-.textArea {
-  width: 100%;
-  height: 100%;
-  padding: 25px 20px 0px 20px;
+.textAreaWrap {
+  height: 80%;
 
-  overflow: hidden;
+  .textArea {
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px 0px 20px;
 
-  resize: none;
-  color: $gray-color-2;
-  font-size: $font-size-big;
-  font-family: $font-accent;
+    overflow: hidden;
 
-  @include md {
+    resize: none;
+    color: $gray-color-2;
+    font-size: $font-size-big;
+    font-family: $font-accent;
+
+    @include md {
+      font-size: $font-size-medium;
+    }
+
+    @include sm {
+      padding: 10px 10px 5px 12px;
+      font-size: $font-size-xs;
+    }
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-color: $gray-color-4;
+    border-style: solid;
+
+    transition: background-color 0.2s;
+    background-color: $gray-color-4;
+
+    &:focus {
+      background-color: $white-color;
+    }
+  }
+
+  .textAreaOverlay {
     font-size: $font-size-medium;
+    background-color: $gray-color-6;
+    padding: 7px 0px 0px 15px;
+    width: 100%;
+
+    border-color: $gray-color-3;
+    box-shadow: 0px 0px 16px -1px $gray-color-6;
+
+    @include xxl {
+      padding: 6px 0px 0px 11px;
+    }
+
+    @include xl {
+      padding: 7px 0px 0px 15px;
+    }
+
+    @include lg {
+      padding: 7px 0px 0px 13px;
+    }
+
+    @include md {
+      font-size: $font-size-small;
+      padding: 6px 0px 0px 6px;
+    }
+
+    @include sm {
+      font-size: $font-size-xs;
+      padding: 3px 0px 0px 6px;
+    }
+
+    &:focus {
+      background-color: $white-color;
+    }
   }
-
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  border-radius: 25px;
-  border-color: $gray-color-4;
-  border-style: solid;
-
-  transition: background-color 0.2s;
-  background-color: $gray-color-4;
-
-  &:focus {
-    background-color: transparent;
-  }
-}
-
-.hint {
-  display: inline-block;
-  position: absolute;
-  right: 8%;
-  top: 42%;
 }

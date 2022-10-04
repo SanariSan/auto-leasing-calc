@@ -7,8 +7,6 @@ const INITIAL_STATE: TInitialState = {
     carPriceCurrent: 3_300_000,
   },
   firstPayment: {
-    // firstPaymentMin: 0,
-    // firstPaymentMax: 0,
     firstPaymentCurrent: 420_000,
     firstPaymentPercMin: 10,
     firstPaymentPercMax: 60,

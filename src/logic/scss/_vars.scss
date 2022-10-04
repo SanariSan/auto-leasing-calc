@@ -7,6 +7,7 @@ $font-size-big: 30px;
 $font-size-medium: 22px;
 $font-size-small: 16px;
 $font-size-smaller: 14px;
+$font-size-xs: 10px;
 
 $white-color: #ffffff;
 $white-color-2: #fdfcf7;
@@ -16,14 +17,14 @@ $gray-color-2: #575757;
 $gray-color-3: #e1e1e1;
 $gray-color-4: #f3f3f4;
 $gray-color-5: #ebebec;
-// $gray-color-2: rgba(87, 87, 87, 0.4);
+$gray-color-6: #e0e0e0;
 $orange-color: #ff9514;
 $orange-color-2: rgba(255, 149, 20, 0.4);
+$purple-color-1: #9f6eff;
 
 $bg-color: $white-color;
 $text-color-accent: $black-color;
 $text-color-default: $gray-color;
-// $text-color-inactive: $gray-color-2;
 $btn-color-active: $orange-color;
 $btn-color-inactive: $orange-color-2;
 $btn-color-hover: $black-color;
@@ -35,15 +36,15 @@ $btn-color-pressed: $gray-color-2;
 // Small tablets and large smartphones (landscape view)
 $screen-xs-min: 0px;
 // Small tablets (portrait view)
-$screen-sm-min: 320px;
+$screen-sm-min: 319px;
 // Tablets and small desktops
-$screen-md-min: 768px;
+$screen-md-min: 767px;
 // Large tablets and desktops
-$screen-lg-min: 1024px;
+$screen-lg-min: 1023px;
 // Big screens
-$screen-xl-min: 1440px;
+$screen-xl-min: 1439px;
 // Very big screens (~2k resolution)
-$screen-xxl-min: 1800px;
+$screen-xxl-min: 1799px;
 
 // Customization Bootstrap grid vars from "app/libs/bootstrap/scss/_variables.scss"
 $grid-gutter-width: 1.5rem;

@@ -1,11 +1,16 @@
 .dimmer {
-  position: absolute;
   top: 0;
   left: 0;
   width: 110%;
   height: 110%;
-  opacity: 0.4;
   z-index: 3;
+  transition: visibility, opacity 0.3s;
+}
+
+.white {
   background-color: white;
-  transition: background-color 0.2s;
+}
+
+.black {
+  background-color: black;
 }

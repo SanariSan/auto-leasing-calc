@@ -4,8 +4,4 @@ type TInitialState = {
   error: string | undefined;
 };
 
-type TInitialStateThunk = {
-  submitParams: TInitialState;
-};
-
-export type { TInitialState, TInitialStateThunk };
+export type { TInitialState };

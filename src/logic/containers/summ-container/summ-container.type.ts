@@ -1,5 +1,5 @@
 type TSumm = {
-  hint: string;
+  title: string;
   amount: number | string;
 };
 

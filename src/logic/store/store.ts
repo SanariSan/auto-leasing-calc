@@ -6,8 +6,6 @@ const Store = configureStore({
     calcParams,
     submitParams,
   },
-  // https://redux-toolkit.js.org/api/getDefaultMiddleware
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // .concat(logger)
 });
 
 export { Store };

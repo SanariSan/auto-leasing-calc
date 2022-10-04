@@ -5,8 +5,6 @@ type TInitialState = {
     carPriceCurrent: number;
   };
   firstPayment: {
-    // firstPaymentMin: number;
-    // firstPaymentMax: number;
     firstPaymentCurrent: number;
     firstPaymentPercMin: number;
     firstPaymentPercMax: number;
