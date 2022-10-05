@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { sleep } from '../../helpers/util';
+import { GenericError } from '../error';
 import { DEFAULT_FETCH_HEADERS, DEFAULT_FETCH_OPTIONS } from './services.const';
 import type { IRequestOptions } from './services.type';
 
@@ -106,13 +107,13 @@ async function request({
 
     // exit point with response
     if (response !== undefined) {
-      console.dir({ url: response.url, status: response.status, headers: response.headers });
+      // console.dir({ url: response.url, status: response.status, headers: response.headers });
       return response;
     }
 
     // check if external signal was called at this point to not sleep when just need to exit
     if (externalAbortController.signal.aborted || (abortSignal && abortSignal.aborted)) {
-      errorReturn = new Error('Request externally aborted');
+      errorReturn = new GenericError('Request externally aborted');
       break;
     }
 

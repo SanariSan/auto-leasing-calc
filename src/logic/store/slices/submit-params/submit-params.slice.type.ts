@@ -1,7 +1,12 @@
+type TSuccessResponse = {
+  success: boolean;
+  [key: string]: unknown;
+};
+
 type TInitialState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  response: Record<string, unknown> | string | undefined;
+  response: TSuccessResponse | undefined;
   error: string | undefined;
 };
 
-export type { TInitialState };
+export type { TInitialState, TSuccessResponse };

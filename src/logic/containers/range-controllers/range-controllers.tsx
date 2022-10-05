@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { deTemplate, template } from '../../../helpers/util';
-import { DimmerComponent } from '../../components/dimmer';
 import { HintRightComponent } from '../../components/range-controller';
 import { TitleSubComponent } from '../../components/title';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -16,7 +15,6 @@ import {
   setFirstPayment,
   setFirstPaymentPerc,
   setRepaymentLength,
-  submitParamsSelector,
   summSelector,
   updateMonthlyRepayment,
   updateTotalPayment,
@@ -31,7 +29,7 @@ const RangeControllersContainer: FC = () => {
   const { firstPaymentPercMin, firstPaymentPercMax, firstPaymentPercCurrent, firstPaymentCurrent } =
     useAppSelector(firstPaymentSelector);
   const { monthlyRepayment } = useAppSelector(summSelector);
-  const { status } = useAppSelector(submitParamsSelector);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const RangeControllersContainer: FC = () => {
   }, [dispatch, firstPaymentCurrent, repaymentLengthCurrent]);
 
   return (
-    <Container className="px-0 position-relative">
+    <Container className="px-0">
       <Row>
         <Col xs={12} xl={4}>
           <Container className="gy-3 px-2">
@@ -140,7 +138,6 @@ const RangeControllersContainer: FC = () => {
             </Row>
           </Container>
         </Col>
-        <DimmerComponent dimmed={status === 'loading'} />
       </Row>
     </Container>
   );

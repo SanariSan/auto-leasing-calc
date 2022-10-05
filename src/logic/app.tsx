@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { sleep } from '../helpers/util';
 import s from './app.module.scss';
 import { MainContainer } from './containers/main';
-import { PopupContainer } from './containers/popup';
+import { ResponseStatusPopupContainer } from './containers/response-status-popup';
 import { ScreenResContainer } from './containers/screen-res';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { setIdle, submitAllParams, submitParamsSelector } from './store';
@@ -16,7 +16,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (status === 'succeeded' || status === 'failed') {
-      void sleep(5000).then(() => dispatch(setIdle()));
+      void sleep(3000).then(() => dispatch(setIdle()));
     }
   }, [dispatch, status]);
 
@@ -32,7 +32,7 @@ const App: FC = () => {
     <>
       <Switch>
         <Route exact path={`/${process.env.REACT_APP_URL_PATH}`}>
-          <PopupContainer />
+          <ResponseStatusPopupContainer />
           <ScreenResContainer />
           <Container className={s.appWrap}>
             <Container as={'form'} onSubmit={onSubmit} fluid className={s.app}>

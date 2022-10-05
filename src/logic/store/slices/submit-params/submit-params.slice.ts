@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Request } from '../../../../access-layer/services';
+import { sleep } from '../../../../helpers/util';
 import type { TStore } from '../../store.type';
 import { ThunkError } from './submit-params.error';
-import type { TInitialState } from './submit-params.slice.type';
+import type { TInitialState, TSuccessResponse } from './submit-params.slice.type';
 
 /* eslint-disable no-param-reassign */
 
@@ -27,24 +28,33 @@ const submitAllParams = createAsyncThunk(
         monthlyRepayment: state.calcParams.summ.monthlyRepayment,
       });
 
+      const startTime = Date.now();
       const response = await Request.post({
         url:
           process.env.NODE_ENV === 'production'
-            ? `https://hookb.in/eK160jgYJ6UlaRPldJ1P`
-            : `https://webshook.site/521a2a69-d51e-495c-bd73-8aa78dfebf46`,
+            ? process.env.REACT_APP_BACKEND_URL_PROD
+            : process.env.REACT_APP_BACKEND_URL_DEV,
         headers: { 'Content-Type': 'application/json' },
         body,
         abortSignal: signal,
       });
+      const endTime = Date.now();
+      const diff = endTime - startTime;
 
-      try {
-        return (await response.clone().json()) as Record<string, unknown>;
-      } catch {
-        return await response.text();
+      // manual throttle for loading showcase, min load time is 1.5 seconds here
+      if (diff < 1500) {
+        await sleep(1500 - diff);
       }
+
+      const responseJson = (await response.clone().json()) as TSuccessResponse;
+
+      console.log(response);
+      console.log(responseJson);
+
+      return responseJson;
     } catch (error: unknown) {
       const thunkError = new ThunkError((error as Error).message, {
-        which: 'Send summ data request',
+        where: 'Send summ data request',
       });
 
       console.log(JSON.stringify(thunkError));
