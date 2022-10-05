@@ -2,6 +2,7 @@ import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { ButtonComponent } from '../../components/button';
+import { DimmerComponent } from '../../components/dimmer';
 import { TitleMainComponent } from '../../components/title';
 import { useAppSelector } from '../../hooks/redux';
 import { submitParamsSelector, summSelector } from '../../store';
@@ -20,8 +21,9 @@ const MainContainer: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col className="px-3">
+        <Col className="px-3 position-relative">
           <RangeControllersContainer />
+          <DimmerComponent dimmed={status === 'loading'} />
         </Col>
       </Row>
       <Row sm={1} md={2} xl={3} className="px-3">
