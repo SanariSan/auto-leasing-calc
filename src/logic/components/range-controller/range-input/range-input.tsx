@@ -6,6 +6,8 @@ import type { TRangeInput } from './range-input.type';
 const RangeInputComponent: FC<TRangeInput> = ({
   textareaValue,
   onTextareaInput,
+  onTextareaFocus,
+  onTextareaBlur,
   type = 'default',
 }) => (
   <div className={s.textAreaWrap}>
@@ -14,6 +16,8 @@ const RangeInputComponent: FC<TRangeInput> = ({
       aria-multiline={false}
       value={textareaValue}
       onInput={onTextareaInput}
+      onFocus={onTextareaFocus}
+      onBlur={onTextareaBlur}
     />
   </div>
 );
