@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/car-leasing-calc/static/css/main.26ea1e9b.css",
-    "main.js": "/car-leasing-calc/static/js/main.e3910872.js",
+    "main.css": "/car-leasing-calc/static/css/main.adc41fe7.css",
+    "main.js": "/car-leasing-calc/static/js/main.ddbf1546.js",
     "static/media/Nekst-Black.woff2": "/car-leasing-calc/static/media/Nekst-Black.44814bfd3ba4a266cf1d.woff2",
     "static/media/Gilroy-Regular.woff2": "/car-leasing-calc/static/media/Gilroy-Regular.f6c9931fabe5a6eb3307.woff2",
     "index.html": "/car-leasing-calc/index.html"
   },
   "entrypoints": [
-    "static/css/main.26ea1e9b.css",
-    "static/js/main.e3910872.js"
+    "static/css/main.adc41fe7.css",
+    "static/js/main.ddbf1546.js"
   ]
 }
