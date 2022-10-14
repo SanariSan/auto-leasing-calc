@@ -121,6 +121,10 @@
     // Off because of browser resolution problems
     "unicorn/prefer-node-protocol": "off",
 
+    // A switch statement is easier to read than multiple if statements with simple equality comparisons.
+    // Off because don't like switch
+    "unicorn/prefer-switch": "off",
+
     // ==========================================
     // rules:prettier
 

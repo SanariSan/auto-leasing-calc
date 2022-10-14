@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { getScreenDetails } from '../../../helpers/browser';
-import { useWindowEvent } from '../use-window-event';
+import { useWindowEvent } from '../window-event';
 
 const useScreenDetails = () => {
   const [details, setDetails] = useState<ReturnType<typeof getScreenDetails>>(() =>

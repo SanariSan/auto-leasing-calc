@@ -3,14 +3,15 @@ import type { FC } from 'react';
 import s from './dimmer.module.scss';
 import type { TDimmer } from './dimmer.type';
 
-const DimmerComponent: FC<TDimmer> = ({ dimmed = false, type = 'white', workArea = 'local' }) => (
+const DimmerComponent: FC<TDimmer> = ({ dimmed = false, color = 'white', onClose }) => (
   <div
-    style={{
-      visibility: dimmed ? 'visible' : 'hidden',
-      opacity: dimmed ? '0.4' : '0',
-      position: workArea === 'local' ? 'absolute' : 'fixed',
-    }}
-    className={classNames(dimmed ? s.dimmer : undefined, type === 'white' ? s.white : s.black)}
+    role={'button'}
+    onClick={onClose}
+    className={classNames(
+      s.dimmer,
+      dimmed ? s.visible : s.hidden,
+      color === 'white' ? s.white : s.black,
+    )}
   ></div>
 );
 

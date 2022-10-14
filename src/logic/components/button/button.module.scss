@@ -5,6 +5,7 @@
   padding: 18px 10px;
   min-height: 65px;
   max-height: 65px;
+  min-width: 100px;
   border-radius: 50px;
   background-color: $orange-color;
   color: $white-color;
@@ -14,6 +15,27 @@
   transition: background-color 0.2s;
   align-items: center;
   vertical-align: middle;
+
+  &.small {
+    min-height: 45px;
+    max-height: 45px;
+    min-width: 80px;
+    font-size: $font-size-medium;
+    padding: 10px 10px;
+
+    @include sm {
+      padding: 4px 10px;
+      min-height: 30px;
+      max-height: 30px;
+      min-width: 60px;
+      font-size: $font-size-xs;
+    }
+  }
+
+  &.medium {
+  }
+  &.big {
+  }
 
   @include xl {
     font-size: $font-size-medium;
@@ -55,6 +77,24 @@
     border-radius: 50%;
     border-top-color: transparent;
     animation: rotate 1s linear infinite;
+
+    &.small {
+      height: 25px;
+      width: 25px;
+      margin-top: 0px;
+      border: 3px solid;
+      border-top-color: transparent;
+
+      @include sm {
+        height: 15px;
+        width: 15px;
+      }
+    }
+
+    &.medium {
+    }
+    &.big {
+    }
 
     @include md {
       height: 35px;
