@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { ScreenResComponent } from '../../components/screen-res';
-import { useScreenDetails } from '../../hooks/use-screen-details';
+import { useScreenDetails } from '../../hooks/screen-details';
 
 const ScreenResContainer: FC = () => {
   const {

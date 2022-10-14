@@ -1,0 +1,97 @@
+@import '../../scss/index.custom';
+
+.popup {
+  overflow: hidden;
+
+  border-radius: 30px;
+  box-shadow: 0 0 7px 1px $gray-color-6;
+
+  z-index: 1;
+
+  min-width: 30%;
+  max-width: 60%;
+  word-wrap: break-word;
+  // overflow-wrap: break-word;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  background-color: $gray-color-6;
+  color: $white-color-2;
+  font-size: $font-size-medium;
+
+  transition: visibility, opacity 0.3s;
+
+  @include xl {
+    min-width: 40%;
+    max-width: 70%;
+  }
+
+  @include lg {
+    min-width: 50%;
+    max-width: 75%;
+  }
+
+  @include md {
+    min-width: 50%;
+    max-width: 85%;
+  }
+
+  @include sm {
+    min-width: 50%;
+    max-width: 100%;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 25px;
+
+    @include sm {
+      padding: 20px 18px;
+    }
+
+    .title {
+      color: $text-color-accent;
+      font-size: $font-size-big;
+      font-family: $font-accent;
+
+      @include md {
+        font-size: $font-size-medium;
+      }
+
+      @include sm {
+        font-size: $font-size-small;
+      }
+    }
+
+    .message {
+      font-size: $font-size-medium;
+      color: $black-color;
+      word-break: break-all;
+
+      @include md {
+        font-size: $font-size-small;
+      }
+
+      @include sm {
+        font-size: $font-size-smaller;
+      }
+    }
+
+    &.button {
+      padding: 10px 25px;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .delimiter {
+    height: 0.8px;
+    width: 100%;
+    background-color: $gray-color-2;
+    box-shadow: 0 0 0.6px 0.2px $gray-color-2;
+  }
+}

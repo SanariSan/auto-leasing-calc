@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { ButtonComponent } from '../../components/button';
 import { DimmerComponent } from '../../components/dimmer';
 import { TitleMainComponent } from '../../components/title';
 import { useAppSelector } from '../../hooks/redux';
+import { useResponseStatus } from '../../hooks/response-status';
 import { submitParamsSelector, summSelector } from '../../store';
+import { PopupNotificationContainer } from '../popup-notification';
 import { RangeControllersContainer } from '../range-controllers';
 import { SummContainer } from '../summ-container';
 
 const MainContainer: React.FC = () => {
   const { status } = useAppSelector(submitParamsSelector);
   const { totalPayment, monthlyRepayment } = useAppSelector(summSelector);
+  const { message, shouldBeDisplayed } = useResponseStatus();
+  const [isOpened, setIsOpened] = useState(false);
+
+  useEffect(() => {
+    if (shouldBeDisplayed) setIsOpened(true);
+  }, [shouldBeDisplayed]);
+
+  const onPopupClose = useCallback((evt: React.MouseEvent<HTMLDivElement>) => {
+    evt.preventDefault();
+    setIsOpened(false);
+  }, []);
 
   return (
     <>
-      <Row>
+      <Row className="mb-4">
         <Col xl={6} lg={12} md={12} xs={10}>
           <TitleMainComponent text={'Рассчитайте стоимость автомобиля в лизинг'} />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-4">
         <Col className="px-3 position-relative">
           <RangeControllersContainer />
           <DimmerComponent dimmed={status === 'loading'} />
@@ -39,6 +52,7 @@ const MainContainer: React.FC = () => {
           </ButtonComponent>
         </Col>
       </Row>
+      <PopupNotificationContainer isOpened={isOpened} onClose={onPopupClose} message={message} />
     </>
   );
 };

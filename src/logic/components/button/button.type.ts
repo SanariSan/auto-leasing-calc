@@ -5,6 +5,7 @@ type TButton = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   loading?: boolean;
+  size?: 'small' | 'medium' | 'big';
 };
 
 export type { TButton };

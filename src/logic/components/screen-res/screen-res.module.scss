@@ -1,7 +1,9 @@
 @import '../../scss/index.custom';
 
 .res {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: max-content;
   font-size: $font-size-smaller;
   background-color: $orange-color;
@@ -14,7 +16,7 @@
   opacity: 0.4;
   text-align: center;
   cursor: pointer;
-  z-index: 5;
+  z-index: 1;
 
   @include sm {
     font-size: $font-size-xs;
